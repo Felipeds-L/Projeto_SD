@@ -1,0 +1,33 @@
+module memoria_instrucoes(
+    input [31:0] endereco,        // Endereço de 32 bits (endereço de byte)
+    output reg [31:0] instrucao   // Instrução de 32 bits lida
+);
+
+    // Memória principal: 1024 palavras de 32 bits (4KB)
+    reg [31:0] memoria [0:1023];  // Índice de 10 bits (0-1023)
+
+    // Inicialização da memória com instruções de exemplo
+    initial begin
+        // Formato das instruções em hexadecimal
+        memoria[0] = 32'h8C010000;   // lw $1, 0($0)  - Carrega do endereço 0 no registrador 1
+        memoria[1] = 32'h8C020004;   // lw $2, 4($0)  - Carrega do endereço 4 no registrador 2
+        memoria[2] = 32'h8C030008;   // lw $3, 8($0)  - Carrega do endereço 8 no registrador 3
+        memoria[3] = 32'h20040064;   // addi $4, $0, 100 - Soma imediato 100 no registrador 4
+        memoria[4] = 32'h00222802;   // mul $5, $1, $2 - Multiplica R1 e R2, resultado em R5
+        memoria[5] = 32'h00A43803;   // div $7, $5, $4 - Divide R5 por R4, resultado em R7
+        memoria[6] = 32'h00273822;   // sub $6, $1, $7 - Subtrai R7 de R1, resultado em R6
+        memoria[7] = 32'h10600002;   // beq $3, $0, 2 - Se R3 == R0, pula 2 instruções
+        memoria[8] = 32'h00273820;   // add $6, $1, $7 - Soma R1 e R7, resultado em R6
+        memoria[9] = 32'hAC060000;   // sw $6, 0($0)  - Armazena R6 no endereço 0
+        
+        // Preenche o restante da memória com NOPs (instruções vazias)
+        for (integer i = 10; i < 1024; i = i + 1)
+            memoria[i] = 32'h00000000;
+    end
+
+    // Leitura da memória (lógica combinacional)
+    always @(*) begin
+        instrucao = memoria[endereco[11:2]]; // Converte endereço de byte para palavra
+    end
+
+endmodule
