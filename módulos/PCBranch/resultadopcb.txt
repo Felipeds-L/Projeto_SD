@@ -1,0 +1,5 @@
+[2025-04-14 23:16:23 UTC] iverilog '-Wall' '-g2012' design.sv testbench.sv  && unbuffer vvp a.out  
+Tempo = 0, PCplus4 = 0x00000004, shifted = 0x00000004, pcbranch = 0x00000008
+Tempo = 10, PCplus4 = 0x00000008, shifted = 0x0000000c, pcbranch = 0x00000014
+Tempo = 20, PCplus4 = 0x00000020, shifted = 0xfffffff0, pcbranch = 0x00000010
+testbench.sv:32: $finish called at 30 (1s)
