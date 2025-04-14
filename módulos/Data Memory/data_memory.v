@@ -17,11 +17,11 @@ always @(posedge clk) begin // escreve na memoria na borda de subida do clock
 
         $display("No tempo: %t, escrevendo na memória: %h, o endereço: %h", $time, writedata, endereco); // imprime pra eu acompanhar
 
-        memory[endereco] <= writedata; // escrevendo na memoria
+        memory[endereco[7:0]] <= writedata; // escrevendo na memoria
 
     end
 end
 
-assign readdata = memory[endereco]; // le da memoria, sempre que o endereco mudar, readdata muda tambem
+assign readdata = memory[endereco[7:0]]; // le da memoria, sempre que o endereco mudar, readdata muda tambem
 
 endmodule
