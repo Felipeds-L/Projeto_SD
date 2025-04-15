@@ -154,7 +154,7 @@ end
 
 assign readdata = memory[endereco[7:0]];
 endmodule
-
+// 9. Unidade de Controle
 module control_unit (
     input  [5:0] Op,           
     input  [5:0] Funct,        
