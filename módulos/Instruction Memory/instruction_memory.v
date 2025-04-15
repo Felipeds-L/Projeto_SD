@@ -8,7 +8,7 @@ module instruction_memory(
 
     // Inicialização da memória com instruções de exemplo
     initial begin
-        // Formato das instruções em hexadecimal
+        // Formato das instruções em hexadecimal para testes no testbench, aqui é onde iremos inserir o código em assembly para MIPS
         mem[0] = 32'h8C010000;   // lw $1, 0($0)
         mem[1] = 32'h8C020004;   // lw $2, 4($0)
         mem[2] = 32'h8C030008;   // lw $3, 8($0)
@@ -19,7 +19,7 @@ module instruction_memory(
         mem[7] = 32'h10600002;   // beq $3, $0, 2 (offset=2)
         mem[8] = 32'h00273820;   // add $6, $1, $7
         mem[9] = 32'hAC060000;   // sw $6, 0($0)
-        
+    
         // Preenche o restante com nops (0x00000000)
         for (integer i = 10; i < 1024; i = i + 1)
             mem[i] = 32'h00000000;
