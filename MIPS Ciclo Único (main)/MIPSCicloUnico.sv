@@ -8,10 +8,11 @@ module instruction_memory(
     reg [31:0] mem [0:1023];
 
     initial begin
-        // Programa adaptado para trabalhar com a inicialização atual da memória de dados
-        mem[0] = 32'h8C010000;   // lw $1, 0($0)  - carrega mem[0] (10)
-        mem[1] = 32'h8C020001;   // lw $2, 1($0)  - carrega mem[1] (11)
-        mem[2] = 32'h00221820;   // add $3, $1, $2
+        // Carregando instrução em Assembly para rodar no MIPS
+        mem[0] = 32'h2001000A; // addi $1, $0, 10
+        mem[1] = 32'h2002000B; // addi $2, $0, 11
+        mem[2] = 32'h00221820; // add  $3, $1, $2
+        mem[3] = 32'hAC030000; // sw   $3, 0($s0)
 
         // Preenche o restante com nops
         for (integer i = 6; i < 1024; i = i + 1)
@@ -95,18 +96,6 @@ module RegisterFile(
 end
 endmodule
 
-
-
-//initial begin
-  //      #60;
-    //    $display("======= Resultados finais dos registradores =======");
-      //  $display("$t3 (R11) = %h", registradores[11]);
-        //$display("$t4 (R12) = %h", registradores[12]);
-        //$display("===================================================");
-    //end
-
-
-
 // 6. Extensão de sinal
 module SignExtend(
     input [15:0] Instr,
@@ -138,10 +127,7 @@ always @(*) begin
         3'b111: ULA_result = (entrada_01 < entrada_02) ? 32'b1 : 32'b0; // SLT
         default: ULA_result = 32'b0;
     endcase
-
-    // Monitorando operações da ULA
-   // $display("At time %t, ULA_control: %b, entrada_01: %h, entrada_02: %h, ULA_result: %h, Zero: %b",
-     //        $time, ULA_control, entrada_01, entrada_02, ULA_result, Zero);
+   
 end
 
 assign Zero = (ULA_result == 0);
@@ -149,23 +135,15 @@ endmodule
 
 // 8. Memória de Dados (último estágio)
 module DataMemory(
-    // entradas
+    // entradas/saídas
     input clk,
     input memwrite,
     input [31:0] endereco, // == ALUresult
     input [31:0] writedata,
-
-    // saidas
     output [31:0] readdata
 );
 
 reg [31:0] memory [0:255]; // 256 palavras de 32 bits
-  
-// Inicializa a memória com valores previsíveis
-initial begin
-    for (int i = 0; i < 256; i = i + 1)
-        memory[i] = i + 10; // ou qualquer valor desejado
-end
 
 always @(posedge clk) begin // escreve na memoria na borda de subida do clock
     if (memwrite) begin // se memwrite for 1, escreve na memoria
@@ -174,7 +152,7 @@ always @(posedge clk) begin // escreve na memoria na borda de subida do clock
     end
 end
 
-assign readdata = memory[endereco[7:0]]; // le da memoria, sempre que o endereco mudar, readdata muda tambem
+assign readdata = memory[endereco[7:0]];
 endmodule
 
 module control_unit (
@@ -217,6 +195,11 @@ module control_unit (
                     default:   ALUControl = 3'bxxx; // Operação inválida
                 endcase
             end
+          	6'b001000: begin // addi
+   				ALUSrc    = 1;
+    			RegWrite  = 1;
+   			    ALUControl = 3'b010; // ADD
+			end
 
             6'b100011: begin // lw (load word)
                 ALUSrc    = 1;         // Segundo operando da ALU é um imediato (offset)
