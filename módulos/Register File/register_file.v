@@ -29,7 +29,7 @@ module RegisterFile(
 
     // escrita dos registradores
     always @(posedge clk) begin // sempre que ocorre uma borda de subida do clock == quando o clock muda de 0 pra 1
-        if (reg_write) begin // se o sinal de escrita for 1 (1 = escrever e 0 = não escrever)
+        if (reg_write && write_reg != 0) begin // se o sinal de escrita for 1 (1 = escrever e 0 = não escrever)
 
             registradores[write_reg] <= write_data; // escreve o dado no registrador
             $display("Escrevendo no registrador %d: %h", write_reg, write_data); // printa o valor do registrador e o dado escrito pra verificcao
