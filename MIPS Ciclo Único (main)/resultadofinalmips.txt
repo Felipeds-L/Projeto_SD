@@ -1,11 +1,13 @@
-[2025-04-15 02:58:08 UTC] iverilog '-Wall' '-g2012' design.sv testbench.sv  && unbuffer vvp a.out  
-design.sv:22: warning: @* is sensitive to all 1024 words in array 'mem'.
+[2025-04-15 15:24:04 UTC] iverilog '-Wall' '-g2012' design.sv testbench.sv  && unbuffer vvp a.out  
+design.sv:23: warning: @* is sensitive to all 1024 words in array 'mem'.
 ===== Iniciando simulação do programa MIPS =====
 Escrevendo no registrador  1: 0000000a
 Escrevendo no registrador  2: 0000000b
 Escrevendo no registrador  3: 00000015
+No tempo: 35000, escrevendo na memória: 00000015, o endereço: 00000000
 Valor em $s1 (parcela1): 10
 Valor em $s2 (parcela2): 11
 Valor em $s3 (soma): 21
+Valor em memória[0]: 21
 ===== Fim da simulação =====
-testbench.sv:30: $finish called at 100000 (1ps)
+testbench.sv:31: $finish called at 100000 (1ps)
