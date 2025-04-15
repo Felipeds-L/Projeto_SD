@@ -1,4 +1,4 @@
-module SignalExtend(
+module SignExtend(
     input [15:0] Instr,
     output reg [31:0] Signlmm
 );
