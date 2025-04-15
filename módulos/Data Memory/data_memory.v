@@ -15,7 +15,7 @@ always @(posedge clk) begin // escreve na memoria na borda de subida do clock
 
     if (memwrite) begin // se memwrite for 1, escreve na memoria
 
-        $display("No tempo: %t, escrevendo na memória: %h, o endereço: %h", $time, writedata, endereco); // imprime pra eu acompanhar
+        $display("No tempo: %0t, escrevendo na memória: %h, o endereço: %h", $time, writedata, endereco); // imprime pra eu acompanhar
 
         memory[endereco[7:0]] <= writedata; // escrevendo na memoria
 
