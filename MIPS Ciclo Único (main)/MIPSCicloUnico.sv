@@ -156,33 +156,33 @@ assign readdata = memory[endereco[7:0]];
 endmodule
 
 module control_unit (
-    input  [5:0] Op,           // Campo opcode da instrução (define o tipo: R, lw, sw, beq, etc)
-    input  [5:0] Funct,        // Campo funct (usado apenas para instruções tipo R)
-    output reg RegDst,         // Define qual campo será usado como registrador destino (rd ou rt)
-    output reg ALUSrc,         // Define se a ALU usará um registrador ou um valor imediato como segundo operando
-    output reg MemtoReg,       // Define se o dado a ser escrito no registrador vem da memória (lw) ou da ALU
-    output reg RegWrite,       // Habilita escrita no banco de registradores
-    output reg MemWrite,       // Habilita escrita na memória de dados
-    output reg Branch,         // Sinal de controle usado para instrução de desvio condicional (beq)
-    output reg [2:0] ALUControl // Sinal que define a operação da ALU (add, sub, and, or, etc.)
+    input  [5:0] Op,           
+    input  [5:0] Funct,        
+    output reg RegDst,         
+    output reg ALUSrc,         
+    output reg MemtoReg,       
+    output reg RegWrite,       
+    output reg MemWrite,       
+    output reg Branch,         
+    output reg [2:0] ALUControl 
 );
 
+    // Inicializa os sinais com valores padrão (evita latch)
     always @(*) begin
-        // Inicializa os sinais com valores padrão (evita latch)
-        RegDst    = 0;         // Por padrão, destino é rt
-        ALUSrc    = 0;         // Por padrão, segundo operando vem de registrador
-        MemtoReg  = 0;         // Por padrão, resultado da ALU vai para o registrador
-        RegWrite  = 0;         // Escrita desabilitada por padrão
-        MemWrite  = 0;         // Escrita na memória desabilitada
-        Branch    = 0;         // Sem desvio por padrão
-        ALUControl = 3'b000;   // Operação padrão da ALU
+        RegDst    = 0;         
+        ALUSrc    = 0;         
+        MemtoReg  = 0;         
+        RegWrite  = 0;         
+        MemWrite  = 0;         
+        Branch    = 0;         
+        ALUControl = 3'b000;   
 
         // Decodifica o campo Op para determinar o tipo da instrução
         case (Op)
             6'b000000: begin  // Instruções tipo R (Op = 0)
-                RegDst    = 1;         // Usa o campo rd como destino
-                RegWrite  = 1;         // Habilita escrita no registrador
-                case (Funct)           // Funct determina operação exata da ALU
+                RegDst    = 1;         
+                RegWrite  = 1;         
+                case (Funct)           
                     6'b100000: ALUControl = 3'b010; // add
                     6'b100010: ALUControl = 3'b110; // sub
                     6'b100100: ALUControl = 3'b000; // and
@@ -202,21 +202,21 @@ module control_unit (
 			end
 
             6'b100011: begin // lw (load word)
-                ALUSrc    = 1;         // Segundo operando da ALU é um imediato (offset)
-                MemtoReg  = 1;         // Valor da memória será escrito no registrador
-                RegWrite  = 1;         // Habilita escrita no registrador
-                ALUControl = 3'b010;   // ALU faz add para calcular endereço
+                ALUSrc    = 1;         
+                MemtoReg  = 1;         
+                RegWrite  = 1;         
+                ALUControl = 3'b010;   
             end
 
             6'b101011: begin // sw (store word)
-                ALUSrc    = 1;         // Segundo operando é imediato (offset)
-                MemWrite  = 1;         // Habilita escrita na memória
-                ALUControl = 3'b010;   // ALU faz add para calcular endereço
+                ALUSrc    = 1;         
+                MemWrite  = 1;         
+                ALUControl = 3'b010;   
             end
 
             6'b000100: begin // beq (branch if equal)
-                Branch    = 1;         // Ativa controle de desvio condicional
-                ALUControl = 3'b110;   // ALU faz subtração para testar igualdade
+                Branch    = 1;         
+                ALUControl = 3'b110;   
             end
 
             default: begin
