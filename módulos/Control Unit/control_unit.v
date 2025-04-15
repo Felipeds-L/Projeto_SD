@@ -32,6 +32,8 @@ module control_unit (
                     6'b100101: ALUControl = 3'b001; // or
                     6'b101010: ALUControl = 3'b111; // slt (set on less than)
                     6'b100111: ALUControl = 3'b100; // nor
+                    6'b011000: ALUControl = 3'b011; // mul
+    				6'b011010: ALUControl = 3'b101; // div
                     default:   ALUControl = 3'bxxx; // Operação inválida
                 endcase
             end
