@@ -1,11 +1,11 @@
-module tb_SignalExtend;
+module tb_SignExtend;
 
     // Sinais de entrada/saída
     reg [15:0] Instr;
     wire [31:0] Signlmm;
 
     // Instância do módulo
-    SignalExtend uut (
+    SignExtend uut (
         .Instr(Instr),
         .Signlmm(Signlmm)
     );
