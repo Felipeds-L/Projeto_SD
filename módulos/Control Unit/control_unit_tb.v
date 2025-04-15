@@ -67,3 +67,20 @@ module control_unit_tb;
     end
 
 endmodule
+
+
+
+// Resultado do Teste 
+warning: Some design elements have no explicit time unit and/or
+       : time precision. This may cause confusing timing results.
+       : Affected design elements are:
+       :   -- module control_unit declared here: design.sv:1
+Tempo | Op       | Funct    || RegDst ALUSrc MemtoReg RegWrite MemWrite Branch ALUControl
+------------------------------------------------------------------------------------------
+  10ns | 000000 | 100000 ||   1      0       0        1        0        0      010
+  20ns | 000000 | 100010 ||   1      0       0        1        0        0      110
+  30ns | 100011 | xxxxxx ||   0      1       1        1        0        0      010
+  40ns | 101011 | xxxxxx ||   0      1       0        0        1        0      010
+  50ns | 000100 | xxxxxx ||   0      0       0        0        0        1      110
+  60ns | 111111 | xxxxxx ||   0      0       0        0        0        0      xxx
+testbench.sv:66: $finish called at 60000 (1ps)

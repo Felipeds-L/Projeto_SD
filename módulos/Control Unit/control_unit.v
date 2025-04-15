@@ -1,13 +1,13 @@
 module control_unit (
-    input  [5:0] Op,           // Campo opcode da instrução (define o tipo: R, lw, sw, beq, etc)
-    input  [5:0] Funct,        // Campo funct (usado apenas para instruções tipo R)
-    output reg RegDst,         // Define qual campo será usado como registrador destino (rd ou rt)
-    output reg ALUSrc,         // Define se a ALU usará um registrador ou um valor imediato como segundo operando
-    output reg MemtoReg,       // Define se o dado a ser escrito no registrador vem da memória (lw) ou da ALU
-    output reg RegWrite,       // Habilita escrita no banco de registradores
-    output reg MemWrite,       // Habilita escrita na memória de dados
-    output reg Branch,         // Sinal de controle usado para instrução de desvio condicional (beq)
-    output reg [2:0] ALUControl // Sinal que define a operação da ALU (add, sub, and, or, etc.)
+    input  [5:0] Op,           
+    input  [5:0] Funct,        
+    output reg RegDst,         
+    output reg ALUSrc,         
+    output reg MemtoReg,       
+    output reg RegWrite,       
+    output reg MemWrite,       
+    output reg Branch,         
+    output reg [2:0] ALUControl 
 );
 
     always @(*) begin
