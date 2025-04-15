@@ -18,12 +18,7 @@ module instruction_memory(
         mem[6] = 32'h00273822;   // sub $6, $1, $7
         mem[7] = 32'h10600002;   // beq $3, $0, 2 (offset=2)
         mem[8] = 32'h00273820;   // add $6, $1, $7
-        mem[9] = 32'hAC060000;   // sw $6, 0($0)
-    
-        // Preenche o restante com nops (0x00000000)
-        for (integer i = 10; i < 1024; i = i + 1)
-            mem[i] = 32'h00000000;
-    end
+        mem[9] = 32'hAC060000;   // sw $6, 0($0)   
 
     // Leitura da memória (combinacional)
     always @(*) begin
