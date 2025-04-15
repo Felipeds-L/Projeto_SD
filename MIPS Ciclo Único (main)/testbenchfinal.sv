@@ -25,6 +25,7 @@ module tb_MIPSCicloUnico;
      	$display("Valor em $s1 (parcela1): %0d", uut.regfile.registradores[1]);
       	$display("Valor em $s2 (parcela2): %0d", uut.regfile.registradores[2]);
      	$display("Valor em $s3 (soma): %0d", uut.regfile.registradores[3]);
+        $display("Valor em memória[0]: %0d", uut.dmem.memory[0]);
 
         $display("===== Fim da simulação =====");
         $finish;
