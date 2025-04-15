@@ -37,7 +37,12 @@ module control_unit (
                     default:   ALUControl = 3'bxxx; // Operação inválida
                 endcase
             end
-
+            6'b001000: begin // addi
+   				ALUSrc    = 1;
+    			RegWrite  = 1;
+   			    ALUControl = 3'b010; // ADD
+			end
+            
             6'b100011: begin // lw (load word)
                 ALUSrc    = 1;         // Segundo operando da ALU é um imediato (offset)
                 MemtoReg  = 1;         // Valor da memória será escrito no registrador
