@@ -1,0 +1,34 @@
+[2025-04-15 00:23:52 UTC] iverilog '-Wall' '-g2012' design.sv testbench.sv  && unbuffer vvp a.out  
+design.sv:31: warning: @* is sensitive to all 1024 words in array 'mem'.
+===== Iniciando simulação do processador MIPS Ciclo Único =====
+Tempo | PC       | Instrução    | RegWrite | ALU_result | Zero
+At time                    0, ULA_control: 010, entrada_01: 00000000, entrada_02: xxxxxxxx, ULA_result: xxxxxxxx, Zero: x
+At time                    0, ULA_control: 010, entrada_01: 00000000, entrada_02: 00000000, ULA_result: 00000000, Zero: 1
+Escrevendo no registrador  1: 0000000a
+At time                    5, ULA_control: 010, entrada_01: 00000000, entrada_02: 00000004, ULA_result: 00000004, Zero: 0
+Escrevendo no registrador  2: 0000000e
+At time                   15, ULA_control: 010, entrada_01: 00000000, entrada_02: 00000008, ULA_result: 00000008, Zero: 0
+Escrevendo no registrador  3: 00000012
+At time                   25, ULA_control: xxx, entrada_01: 00000000, entrada_02: 00000000, ULA_result: 00000000, Zero: 1
+At time                   35, ULA_control: xxx, entrada_01: 0000000a, entrada_02: 00000000, ULA_result: 00000000, Zero: 1
+At time                   35, ULA_control: xxx, entrada_01: 0000000a, entrada_02: 0000000e, ULA_result: 00000000, Zero: 1
+Escrevendo no registrador  5: 00000000
+At time                   45, ULA_control: xxx, entrada_01: 00000000, entrada_02: 0000000e, ULA_result: 00000000, Zero: 1
+At time                   45, ULA_control: xxx, entrada_01: 00000000, entrada_02: 00000000, ULA_result: 00000000, Zero: 1
+Escrevendo no registrador  7: 00000000
+At time                   55, ULA_control: 110, entrada_01: 0000000a, entrada_02: 00000000, ULA_result: 0000000a, Zero: 0
+Escrevendo no registrador  7: 0000000a
+At time                   65, ULA_control: 110, entrada_01: 0000000a, entrada_02: 0000000a, ULA_result: 00000000, Zero: 1
+At time                   65, ULA_control: 110, entrada_01: 00000012, entrada_02: 0000000a, ULA_result: 00000008, Zero: 0
+At time                   65, ULA_control: 110, entrada_01: 00000012, entrada_02: 00000000, ULA_result: 00000012, Zero: 0
+At time                   75, ULA_control: 010, entrada_01: 0000000a, entrada_02: 00000000, ULA_result: 0000000a, Zero: 0
+At time                   75, ULA_control: 010, entrada_01: 0000000a, entrada_02: 0000000a, ULA_result: 00000014, Zero: 0
+Escrevendo no registrador  7: 00000014
+At time                   85, ULA_control: 010, entrada_01: 0000000a, entrada_02: 00000014, ULA_result: 0000001e, Zero: 0
+At time                   85, ULA_control: 010, entrada_01: 00000000, entrada_02: 00000014, ULA_result: 00000014, Zero: 0
+At time                   85, ULA_control: 010, entrada_01: 00000000, entrada_02: 00003820, ULA_result: 00003820, Zero: 0
+At time                   85, ULA_control: 010, entrada_01: 00000000, entrada_02: 00000000, ULA_result: 00000000, Zero: 1
+No tempo:                   95, escrevendo na memória: 00000000, o endereço: 00000000
+At time                   95, ULA_control: xxx, entrada_01: 00000000, entrada_02: 00000000, ULA_result: 00000000, Zero: 1
+===== Fim da simulação =====
+testbench.sv:25: $finish called at 200 (1s)
